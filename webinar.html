@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Webinar Class Registration</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(120deg,#74ebd5,#ACB6E5);
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .box {
+      background: white;
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+      width: 300px;
+      text-align: center;
+    }
+    input, button {
+      width: 100%;
+      padding: 10px;
+      margin: 8px 0;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+    button {
+      background: #4CAF50;
+      color: white;
+      border: none;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    button:hover { background: #45a049; }
+    #loginBox { display: none; }
+  </style>
+</head>
+<body>
+
+  <!-- Registration Box -->
+  <div class="box" id="registerBox">
+    <h3>Register for Webinar Class</h3>
+    <input type="text" id="regName" placeholder="Full Name" required>
+    <input type="email" id="regEmail" placeholder="Email" required>
+    <input type="password" id="regPass" placeholder="Password" required>
+    <button onclick="register()">Register</button>
+  </div>
+
+  <!-- Login Box -->
+  <div class="box" id="loginBox">
+    <h3>Login to Webinar</h3>
+    <input type="email" id="loginEmail" placeholder="Email" required>
+    <input type="password" id="loginPass" placeholder="Password" required>
+    <button onclick="window.location.href='home.html'">Login</button>
+  </div>
+
+  <script>
+    // --- Register Function ---
+    function register() {
+      const name = document.getElementById("regName").value;
+      const email = document.getElementById("regEmail").value;
+      const pass = document.getElementById("regPass").value;
+
+      if (name && email && pass) {
+        // Save in localStorage (demo purpose only)
+        localStorage.setItem("webinarName", name);
+        localStorage.setItem("webinarEmail", email);
+        localStorage.setItem("webinarPass", pass);
+
+        alert("✅ Registration successful! Please log in.");
+
+        // Show login box
+        document.getElementById("registerBox").style.display = "none";
+        document.getElementById("loginBox").style.display = "block";
+      } else {
+        alert("Please fill out all fields!");
+      }
+    }
+
+    // --- Login Function ---
+    function login() {
+      const email = document.getElementById("loginEmail").value;
+      const pass = document.getElementById("loginPass").value;
+
+      const savedEmail = localStorage.getItem("webinarEmail");
+      const savedPass = localStorage.getItem("webinarPass");
+
+      if (email === savedEmail && pass === savedPass) {
+        alert("✅ Login successful! Redirecting to Webinar Home...");
+        window.location.href = "homepage.html";  // Go to homepage
+      } else {
+        alert("❌ Invalid credentials! Try again.");
+      }
+    }
+  </script>
+
+</body>
+</html>
+
